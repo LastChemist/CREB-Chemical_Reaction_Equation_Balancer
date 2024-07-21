@@ -661,7 +661,6 @@ with open(r"{self.current_directory}\solution.automatic.pkl","wb") as solution_f
             # print(self.chemical_formulas_dict, self.reactants_list, self.products_list)
 
         def assignCoefficientsToChemicalFormulas(self) -> None:
-
             for index, chemical_formula in enumerate(
                 list(self.chemical_formulas_dict.keys())
             ):
@@ -708,11 +707,10 @@ with open(r"{self.current_directory}\solution.automatic.pkl","wb") as solution_f
     # --------------
 
     def execute(self, input_chemical_equation: str) -> None:
-
-        linear_equations_system_object: (
-            object
-        ) = EquationUtil().LinearEquationSystemSolverFileMaker(
-            chemical_equation=input_chemical_equation
+        linear_equations_system_object: object = (
+            EquationUtil().LinearEquationSystemSolverFileMaker(
+                chemical_equation=input_chemical_equation
+            )
         )
         linear_equations_system_object.generateEquationAndSaveSolverFile()
         linear_equations_system_object.executeSolverFile()
