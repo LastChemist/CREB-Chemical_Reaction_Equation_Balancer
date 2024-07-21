@@ -14,3 +14,9 @@ The development is being accelarated due to finishing my exams
 
 # Contribution
 Feel free to contribute and share your Ideas! and or improve the code via comment or refactors (*smile)
+
+
+# TODO:
+  - [ ] Add tests using `pytest`.
+  - [ ] Upload missing dependencies like `assets`.
+  - [ ] Add requirements using `python3 -m pip freeze > requirements.txt` or `poetry` or any other python packaging and dependency manager.
