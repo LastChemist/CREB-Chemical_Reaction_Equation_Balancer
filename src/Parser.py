@@ -32,5 +32,33 @@ class ElementCounter:
     def __init__(self, chemical_formula: str) -> None:
         self.chemical_formula = chemical_formula
 
+    def parseFormula(self) -> Counter:
+        def expand(match):
+            content, count = match.groups()
+            if count == "":
+                count = 1
+            else:
+                count = int(count)
+            return content * count
+
+        # Expand parentheses
+        while "(" in self.chemical_formula:  # or '[' in formula or '{' in formula:
+            self.chemical_formula = re.sub(
+                r"\(([^()]+)\)(\d*)", expand, self.chemical_formula
+            )
+            # formula = re.sub(r'\[([^()]+)\](\d*)', expand, formula)
+            # formula = re.sub(r'\{([^()]+)\}(\d*)', expand, formula)
+
+        # Count elements
+        element_counts: Counter = Counter()
+        for element, count in re.findall(r"([A-Z][a-z]*)(\d*)", self.chemical_formula):
+            if count == "":
+                count = 1
+            else:
+                count = int(count)
+            element_counts[element] += count
+
+        return element_counts
+
 
 # end region
