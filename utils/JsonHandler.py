@@ -9,3 +9,7 @@ class Handler:
         if not os.path.isfile(self.file_path):
             self.write(content=self.content)
     
+    def write(self,content:dict = {"equation_solution": "", "error_msg": ""}):
+        with open(self.file_path,"w") as file:
+            json.dump(content,file)
+    
