@@ -22,4 +22,8 @@ class Handler:
         self.content[key] = value
         self.write(content=self.content)
 
-    
+    def removeJsonDataFile(self):
+        # the data.json is a temporary file, so after a successful execution 
+        # of equation balance it would be removed
+        if os.path.isfile(self.file_path):
+            os.remove(self.file_path)
