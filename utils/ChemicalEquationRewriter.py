@@ -63,3 +63,22 @@ class Rewriter:
                 self.assigned_products_list.append(
                     f"{self.chemical_formulas_dict[product]} {product}"
                 )
+
+    def executeRewriter(self, chemical_equation: str) -> str:
+        self.loadEquationSolutionInformation()
+        self.loadChemicalFormulasDictionary(chemical_equation=chemical_equation)
+        self.assignCoefficientsToChemicalFormulas()
+
+        reactants_string: str = ""
+        products_string: str = ""
+
+        for reactant in self.assigned_reactants_list:
+            reactants_string += f"{reactant} + "
+
+        for product in self.assigned_products_list:
+            products_string += f"{product} + "
+
+        reactants_string = reactants_string[:-2]
+        products_string = products_string[:-2]
+
+        return f"{reactants_string} = {products_string}"
