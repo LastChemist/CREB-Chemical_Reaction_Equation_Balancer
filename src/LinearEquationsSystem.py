@@ -164,5 +164,11 @@ handler_object.update(key="equation_solution",value=str(equation_solution))
         ) as solver_file:
             solver_file.write(file_content)
 
+    def executeSolverFile(self):
+        with open(
+            rf"{self.current_directory}\linear_equations_system_solver.automatic.py"
+        ) as file:
+            exec(file.read())
+
 
 # end region
