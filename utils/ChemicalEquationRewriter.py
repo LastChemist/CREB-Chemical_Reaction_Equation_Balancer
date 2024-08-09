@@ -6,7 +6,7 @@ from JsonHandler import Handler
 
 class Rewriter:
     def __init__(self) -> None:
-        self.parent_folder_directory:str = os.path.dirname(__file__)
+        self.parent_folder_directory: str = os.path.dirname(__file__)
         self.equation_solution: tuple = ()
         self.chemical_formulas_dict = {}
         self.reactants_list: list[str] = []
@@ -20,3 +20,8 @@ class Rewriter:
             file_path=rf"{self.parent_folder_directory}"
         )
         self.json_handler_object.read()
+
+    def loadEquationSolutionInformation(self) -> None:
+        self.equation_solution: tuple = sympify(
+            self.json_handler_object.content["equation_solution"]
+        )
