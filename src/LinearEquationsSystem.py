@@ -76,4 +76,31 @@ class Generator:
 
         self.parameter_symbols = self.parameter_symbols[removing_index + 1 :]
 
+    def generateLinearEquationsSystem(self) -> list:
+        self.assignParameter()
+        equations_list: list[str] = []
+        equation: str = ""
+        left_hand: str = ""
+        right_hand: str = ""
+
+        for element in self.present_elements_in_reaction:
+            for reactant in self.reactants_list:
+                if element in self.parsed_reactants[reactant]:
+                    left_hand += f"{self.parsed_reactants[reactant][element]}*{self.reactants_assigned_parameter_dict[reactant]}+"
+
+            for product in self.products_list:
+                if element in self.parsed_products[product]:
+                    right_hand += f"{self.parsed_products[product][element]}*{self.products_assigned_parameter_dict[product]}-"
+
+            left_hand = left_hand[:-1]
+            right_hand = right_hand[:-1]
+
+            equation = f"{left_hand}-{right_hand}"
+            equations_list.append(equation)
+            left_hand = ""
+            right_hand = ""
+
+        return equations_list
+
+
 # end region
