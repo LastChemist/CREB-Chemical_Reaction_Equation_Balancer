@@ -25,3 +25,17 @@ class Rewriter:
         self.equation_solution: tuple = sympify(
             self.json_handler_object.content["equation_solution"]
         )
+
+    def loadChemicalFormulasDictionary(self, chemical_equation: str):
+        equation_parser_object: object = EquationParser(
+            chemical_equation=chemical_equation
+        )
+        equation_parser_object.parse()
+
+        for reactant in equation_parser_object.reactants_list:
+            self.chemical_formulas_dict[reactant] = 0
+            self.reactants_list.append(reactant)
+
+        for product in equation_parser_object.products_list:
+            self.chemical_formulas_dict[product] = 0
+            self.products_list.append(product)
