@@ -62,3 +62,21 @@ class ElementCounter:
 
 
 # end region
+
+# region Equation Parser
+
+
+class EquationParser:
+    def __init__(self, chemical_equation: st) -> None:
+        self.chemical_equation: str = chemical_equation
+        self.equation_splitter: str = "="
+        self.chemical_species_splitter: str = "+"
+
+        self.reactants_list: list[str] = []
+        self.products_list: list[str] = []
+
+        self.parsed_reactants: dict[str, Counter] = {}
+        self.parsed_products: dict[str, Counter] = {}
+
+
+# end region
