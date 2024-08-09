@@ -60,5 +60,20 @@ class Generator:
             self.products_list
         )  # Junior code, fix the formula for "self.demand_for_variables_to_solve_count"
 
+    def assignParameter(self) -> None:
+        self.presentElementsInReaction()
+        removing_index: int = 0
+
+        for i, reactant in enumerate(self.reactants_list):
+            self.reactants_assigned_parameter_dict[reactant] = self.parameter_symbols[i]
+            removing_index = i
+
+        self.parameter_symbols = self.parameter_symbols[removing_index + 1 :]
+
+        for i, product in enumerate(self.products_list):
+            self.products_assigned_parameter_dict[product] = self.parameter_symbols[i]
+            removing_index = i
+
+        self.parameter_symbols = self.parameter_symbols[removing_index + 1 :]
 
 # end region
