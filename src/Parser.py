@@ -111,5 +111,10 @@ class EquationParser:
                 chemical_formula=product
             ).parseFormula()
 
+    def parse(self) -> list[dict, dict]:
+        self.splitIntoChemicalSpecies()
+        self.countElementsInChemicalSpecie()
+        return [self.parsed_reactants, self.parsed_products]
+
 
 # end region
