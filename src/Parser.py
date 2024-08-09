@@ -67,7 +67,7 @@ class ElementCounter:
 
 
 class EquationParser:
-    def __init__(self, chemical_equation: st) -> None:
+    def __init__(self, chemical_equation: str) -> None:
         self.chemical_equation: str = chemical_equation
         self.equation_splitter: str = "="
         self.chemical_species_splitter: str = "+"
