@@ -32,5 +32,7 @@ class Generator:
         self.demand_for_variables_to_solve_count: int = 0
         self.parametric_equations_list: list[str] = []
 
+    def presentElementsInChemicalFormula(self, chemical_formula: str) -> list:
+        return list(ElementMapper(chemical_formula=chemical_formula).search())
 
 # end region
