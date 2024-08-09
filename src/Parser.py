@@ -78,5 +78,26 @@ class EquationParser:
         self.parsed_reactants: dict[str, Counter] = {}
         self.parsed_products: dict[str, Counter] = {}
 
+    def splitIntoChemicalSpecies(self) -> None:
+        splitted_equation: list[str] = self.chemical_equation.split(
+            self.equation_splitter
+        )
+        self.reactants_list = [
+            (
+                "(" + species.strip() + ")"
+                if not species.strip().startswith("(")
+                else species.strip()
+            )
+            for species in splitted_equation[0].split(self.species_splitter)
+        ]
+        self.products_list = [
+            (
+                "(" + species.strip() + ")"
+                if not species.strip().startswith("(")
+                else species.strip()
+            )
+            for species in splitted_equation[1].split(self.species_splitter)
+        ]
+
 
 # end region
