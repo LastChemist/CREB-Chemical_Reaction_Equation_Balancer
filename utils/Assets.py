@@ -118,7 +118,9 @@ elements_list = [
     "Ts",
     "Og",
 ]
-
+"""list: A list of chemical elements represented by their symbols."""
 number_list: list[str] = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+"""list[str]: A list of string representations of numbers from 0 to 9."""
 
 parameter_symbols: str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+"""str: A string containing lowercase and uppercase alphabetic characters used as parameter symbols."""
