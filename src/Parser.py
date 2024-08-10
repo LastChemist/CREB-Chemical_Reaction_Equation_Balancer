@@ -88,7 +88,7 @@ class EquationParser:
                 if not species.strip().startswith("(")
                 else species.strip()
             )
-            for species in splitted_equation[0].split(self.species_splitter)
+            for species in splitted_equation[0].split(self.chemical_species_splitter)
         ]
         self.products_list = [
             (
@@ -96,7 +96,7 @@ class EquationParser:
                 if not species.strip().startswith("(")
                 else species.strip()
             )
-            for species in splitted_equation[1].split(self.species_splitter)
+            for species in splitted_equation[1].split(self.chemical_species_splitter)
         ]
 
     def countElementsInChemicalSpecie(self) -> None:

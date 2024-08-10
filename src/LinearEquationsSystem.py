@@ -1,5 +1,5 @@
 from utils import Assets
-from Parser import ElementMapper, EquationParser
+from src.Parser import ElementMapper, EquationParser
 import os
 
 # region Generator
@@ -11,7 +11,7 @@ class Generator:
 
         self.parameter_symbols: str = Assets.parameter_symbols
         # Junior code, fix it
-        equation_parser_object: object = EquationParser.EquationParser(
+        equation_parser_object: object = EquationParser(
             chemical_equation=chemical_equation
         )
         equation_parser_object.parse()
@@ -139,7 +139,7 @@ class Generator:
 from sympy import symbols
 from sympy.solvers.solveset import linsolve
 import os
-from JsonHandler import Handler
+from utils.JsonHandler import Handler
 
 
 current_directory = os.path.dirname(__file__)

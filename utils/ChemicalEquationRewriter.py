@@ -1,7 +1,7 @@
 import os
 from sympy import sympify
 from src.Parser import EquationParser
-from JsonHandler import Handler
+from utils.JsonHandler import Handler
 
 
 class Rewriter:
@@ -16,15 +16,10 @@ class Rewriter:
         self.assigned_reactants_list: list[str] = []
         self.assigned_products_list: list[str] = []
 
-        self.json_handler_object: object = Handler(
-            file_path=rf"{self.parent_folder_directory}"
-        )
-        self.json_handler_object.read()
-
     def loadEquationSolutionInformation(self) -> None:
-        self.equation_solution: tuple = sympify(
-            self.json_handler_object.content["equation_solution"]
-        )
+        json_handler_object = Handler(file_path=rf"{self.parent_folder_directory}")
+        json_handler_object.read()
+        self.equation_solution: tuple = sympify(json_handler_object.content["equation_solution"])
 
     def loadChemicalFormulasDictionary(self, chemical_equation: str):
         equation_parser_object: object = EquationParser(
