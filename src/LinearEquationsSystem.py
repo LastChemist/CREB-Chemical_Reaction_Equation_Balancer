@@ -151,7 +151,7 @@ x = symbols(str({self.variables_str[::-1][0]}))
 equation_solution = [expr.subs(x, 1) for expr in equation_solution][0]
 
 
-handler_object = Handler(file_path=r"{self.current_directory}")
+handler_object = Handler()
 handler_object.write()
 
 handler_object.update(key="equation_solution",value=str(equation_solution))

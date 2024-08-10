@@ -17,7 +17,7 @@ class Rewriter:
         self.assigned_products_list: list[str] = []
 
     def loadEquationSolutionInformation(self) -> None:
-        json_handler_object = Handler(file_path=rf"{self.parent_folder_directory}")
+        json_handler_object = Handler()
         json_handler_object.read()
         self.equation_solution: tuple = sympify(json_handler_object.content["equation_solution"])
 
