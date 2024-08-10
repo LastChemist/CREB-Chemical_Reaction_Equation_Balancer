@@ -6,7 +6,52 @@ import os
 
 
 class Generator:
+    """
+    A class to generate linear equations for balancing chemical equations.
+
+    Attributes:
+        chemical_equation : str
+            The chemical equation to be parsed.
+        parameter_symbols : str
+            Symbols used for parameters in the equations.
+        reactants_list : list[str]
+            List of reactants.
+        products_list : list[str]
+            List of products.
+        present_elements_in_reaction : list[str]
+            List of elements present in the reaction.
+        parsed_reactants : dict[str, dict[str, str]]
+            Parsed reactants with element counts.
+        parsed_products : dict[str, dict[str, str]]
+            Parsed products with element counts.
+        reactants_assigned_parameter_dict : dict[str, str]
+            Dictionary of reactants assigned to parameters.
+        products_assigned_parameter_dict : dict[str, str]
+            Dictionary of products assigned to parameters.
+        demand_for_variables_to_solve_count : int
+            Number of variables to solve for.
+        parametric_equations_list : list[str]
+            List of parametric equations.
+
+    Methods:
+        presentElementsInChemicalFormula(chemical_formula: str) -> list:
+            Returns a list of elements present in the given chemical formula.
+        presentElementsInReaction() -> list:
+            Identifies and returns a list of elements present in the reaction.
+        assignParameter() -> None:
+            Assigns parameters to reactants and products.
+        generateLinearEquationsSystem() -> list:
+            Generates a system of linear equations for the reaction.
+    """
+
     def __init__(self, chemical_equation: str) -> None:
+        """
+        Constructs all the necessary attributes for the Generator object.
+
+        Parameters:
+            chemical_equation : str
+                The chemical equation to be parsed.
+        """
         self.chemical_equation: str = chemical_equation
 
         self.parameter_symbols: str = Assets.parameter_symbols
@@ -33,9 +78,25 @@ class Generator:
         self.parametric_equations_list: list[str] = []
 
     def presentElementsInChemicalFormula(self, chemical_formula: str) -> list:
+        """
+        Returns a list of elements present in the given chemical formula.
+
+        Parameters:
+            chemical_formula : str
+                The chemical formula to be parsed.
+
+        Returns:
+            list: A list of elements present in the chemical formula.
+        """
         return list(ElementMapper(chemical_formula=chemical_formula).search())
 
     def presentElementsInReaction(self) -> list:
+        """
+        Identifies and returns a list of elements present in the reaction.
+
+        Returns:
+            list: A list of elements present in the reaction.
+        """
         element_list: list[str] = []
         temp_list: list = []
         reactants_list: list[str] = self.reactants_list
@@ -61,6 +122,9 @@ class Generator:
         )  # Junior code, fix the formula for "self.demand_for_variables_to_solve_count"
 
     def assignParameter(self) -> None:
+        """
+        Assigns parameters to reactants and products.
+        """
         self.presentElementsInReaction()
         removing_index: int = 0
 
@@ -77,6 +141,12 @@ class Generator:
         self.parameter_symbols = self.parameter_symbols[removing_index + 1 :]
 
     def generateLinearEquationsSystem(self) -> list:
+        """
+        Generates a system of linear equations for the reaction.
+
+        Returns:
+            list: A list of linear equations.
+        """
         self.assignParameter()
         equations_list: list[str] = []
         equation: str = ""
@@ -107,7 +177,38 @@ class Generator:
     # region Solver File maker
 
     class FileMaker:
+        """
+        A class to create and execute a solver file for the system of linear equations.
+
+        Attributes:
+            chemical_equation : str
+                The chemical equation to be parsed.
+            current_directory : str
+                The current directory of the file.
+            system_of_linear_equations : list
+                The system of linear equations generated.
+            num_of_variables : int
+                Number of variables to solve for.
+            symbols_list : str
+                List of parameter symbols.
+            variables_str : str
+                String representation of variables.
+
+        Methods:
+            generateEquationAndSaveSolverFile() -> None:
+                Generates the equation and saves the solver file.
+            executeSolverFile() -> None:
+                Executes the solver file.
+        """
+
         def __init__(self, chemical_equation: str) -> None:
+            """
+            Constructs all the necessary attributes for the FileMaker object.
+
+            Parameters:
+                chemical_equation : str
+                    The chemical equation to be parsed.
+            """
             self.chemical_equation = chemical_equation
 
             self.current_directory = os.path.dirname(__file__)
@@ -133,7 +234,9 @@ class Generator:
                     self.variables_str += ","
 
         def generateEquationAndSaveSolverFile(self) -> None:
-
+            """
+            Generates the equation and saves the solver file.
+            """
             self.variables_str: str = self.variables_str[0:-2]
             file_content: str = rf"""# [DO NOT MODIFY] Automatically generated.
 from sympy import symbols
@@ -156,8 +259,9 @@ handler_object.write()
 
 handler_object.update(key="equation_solution",value=str(equation_solution))
     """
-        #
-
+            #
+            # Note : I know this is not a best practice to repeat and place the file name twice instead of 
+            # defining a single variable and do the job but, ... ... o well ¯\_(ツ)_/¯ it works, then I never touch it ¬_¬
             with open(
                 rf"{self.current_directory}\linear_equations_system_solver.automatic.py",
                 "w",
