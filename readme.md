@@ -6,7 +6,7 @@
 
 ### Variables:
 - Use snake case for variable names (e.g., `reactants_list`).
-- Explicitly define variable types (e.g., `reactant_list: list[str] = []`).
+- If possible explicitly define variable types (e.g., `reactant_list: list[str] = []`).
 
 ### Functions:
 - Start function names with a lowercase letter and use camel case (e.g., `equationRewriter`, `equationFileGenerator`).
