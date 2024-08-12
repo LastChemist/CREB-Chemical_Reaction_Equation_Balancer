@@ -1,0 +1,9 @@
+# python byte-code files
+*.pyc
+
+# json files [mostly unneccessary]
+*.json
+
+# this file is been automatically created and will change for
+# every certain equation
+linear_equations_system_solver.automatic.py
