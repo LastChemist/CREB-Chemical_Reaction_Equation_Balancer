@@ -109,6 +109,26 @@ class Stoichiometry:
 
         return round(molar_weight, 3)
 
+    def calc_ratio(self) -> None:
+        """
+        Calculates the stoichiometric ratios for the chemical equation.
+
+        The ratios are calculated based on the coefficients of the balanced equation
+        and the selected species. The result is stored in the GlobalVariables.ratios list.
+
+        Returns:
+            None
+        """
+        ratios = []
+        for coefficient in GlobalVariables.equation_solution:
+            ratios.append(
+                coefficient
+                / GlobalVariables.equation_solution[
+                    int(GlobalVariables.selected_specie)
+                ]
+            )
+        GlobalVariables.ratios = ratios
+
 
 class UI:
     pass
