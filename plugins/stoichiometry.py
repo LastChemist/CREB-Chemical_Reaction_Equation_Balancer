@@ -3,6 +3,7 @@ from Core.utils import ChemicalEquationRewriter, Assets
 
 from prettytable import PrettyTable
 
+
 class GlobalVariables:
 
     mode: str = ""
@@ -164,3 +165,34 @@ class Stoichiometry:
 class UI:
     def __init__(self):
         pass
+
+    def create_table(field_names: list, rows: list, divider="-----") -> PrettyTable:
+        """
+        Creates a PrettyTable with the specified field names and rows, adding dividers between rows.
+
+        Args:
+            field_names (list): The names of the columns.
+            rows (list): The rows of data to be added to the table.
+            divider (str): The divider string to be added between rows. Default is "-----".
+
+        Returns:
+            PrettyTable: The created PrettyTable object.
+        """
+        table = PrettyTable()
+
+        # Set the table field names
+        table.field_names = field_names
+
+        # Add rows to the table with dividers
+        for row_index, row in enumerate(rows):
+            if len(row) != len(table.field_names):
+                raise ValueError(
+                    f"Row has incorrect number of values, (actual) {len(row)} != {len(table.field_names)} (expected)"
+                )
+            table.add_row(row=row)
+            if row_index < len(rows) - 1:  # Ensure the last row doesn't add a divider
+                table.add_row([divider] * len(table.field_names))
+
+        table.align = "c"  # Center-align all columns
+
+        return table
