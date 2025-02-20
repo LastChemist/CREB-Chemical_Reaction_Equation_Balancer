@@ -129,6 +129,36 @@ class Stoichiometry:
             )
         GlobalVariables.ratios = ratios
 
+    def calc_species_molar_weight(self) -> None:
+        """
+        Calculates and stores the molar weights of the reactants and products.
+
+        This method first balances the chemical equation. Then it calculates the molar weights
+        of each chemical formula in the reactants and products lists. The results are stored
+        in GlobalVariables.reactants_molar_weights_list and GlobalVariables.products_molar_weights_list.
+
+        Returns:
+            None
+        """
+        # Balance the chemical equation
+        self.balance_equation()
+
+        # Calculate and store the molar weights of reactants
+        [
+            GlobalVariables.reactants_molar_weights_list.append(
+                self.calc_molar_weight(chemical_formula=chemical_formula)
+            )
+            for chemical_formula in GlobalVariables.reactants_list
+        ]
+
+        # Calculate and store the molar weights of products
+        [
+            GlobalVariables.products_molar_weights_list.append(
+                self.calc_molar_weight(chemical_formula=chemical_formula)
+            )
+            for chemical_formula in GlobalVariables.products_list
+        ]
+
 
 class UI:
     pass
