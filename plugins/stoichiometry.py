@@ -57,6 +57,31 @@ class Stoichiometry:
 
         self.specie_molar_weight: dict[str, float] = {}
 
+    def balance_equation(self):
+        """Balances the chemical equation."""
+
+        # Generate and solve the system of linear equations representing the chemical equation
+        linear_equations_system_object: object = (
+            LinearEquationsSystem.Generator.FileMaker(
+                chemical_equation=self.chemical_equation
+            )
+        )
+        linear_equations_system_object.generateEquationAndSaveSolverFile()
+        linear_equations_system_object.executeSolverFile()
+
+        # Retrieve the solution to the chemical equation as a tuple
+        rewriter_object: object = ChemicalEquationRewriter.Rewriter()
+        rewriter_object.loadEquationSolutionInformation()
+        equation_solution: tuple = rewriter_object.equation_solution
+
+        # Convert the equation solution from a tuple to a list of coefficients
+        coefficients_list: list[int] = []
+
+        for coefficient in equation_solution:
+            coefficients_list.append(coefficient)
+
+        GlobalVariables.equation_solution = coefficients_list
+
 
 class UI:
     pass
