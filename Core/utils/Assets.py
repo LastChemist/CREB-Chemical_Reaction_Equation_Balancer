@@ -250,7 +250,7 @@ parameter_symbols: str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 """str: A string containing lowercase and uppercase alphabetic characters used as parameter symbols."""
 
 
-periodic_table: dict[str, int] = {
+periodic_table: dict[str, float] = {
     "H": 1.008,
     "He": 4.0026,
     "Li": 6.94,
