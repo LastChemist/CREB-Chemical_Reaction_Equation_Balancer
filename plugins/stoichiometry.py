@@ -33,8 +33,29 @@ class GlobalVariables:
     grams_list: list[float] = []
     """Stores calculated grams"""
 
+
 class Stoichiometry:
-    pass
+    def __init__(self, chemical_equation: str = ""):
+        self.chemical_equation: str = chemical_equation
+
+        self.equation_parser_object: object = Parser.EquationParser(
+            chemical_equation=self.chemical_equation
+        )
+        self.equation_parser_object.parse()
+
+        GlobalVariables.reactants_list = self.equation_parser_object.reactants_list
+        GlobalVariables.products_list = self.equation_parser_object.products_list
+
+        [
+            GlobalVariables.total_species_chemical_formulas.append(chemical_formula)
+            for chemical_formula in GlobalVariables.reactants_list
+        ]
+        [
+            GlobalVariables.total_species_chemical_formulas.append(chemical_formula)
+            for chemical_formula in GlobalVariables.products_list
+        ]
+
+        self.specie_molar_weight: dict[str, float] = {}
 
 
 class UI:
