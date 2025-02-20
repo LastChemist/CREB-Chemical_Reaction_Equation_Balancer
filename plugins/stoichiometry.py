@@ -82,6 +82,33 @@ class Stoichiometry:
 
         GlobalVariables.equation_solution = coefficients_list
 
+    def calc_molar_weight(self, chemical_formula: str) -> float:
+        """
+        Calculates the molar weight of the given chemical formula.
+
+        The molar weight is calculated using atomic masses from Assets.py.
+
+        Args:
+            chemical_formula (str): The chemical formula for which to calculate the molar weight.
+
+        Returns:
+            float: The molar weight rounded to 3 decimal places.
+        """
+        molar_weight: float = 0
+
+        # Get the count of each element in the chemical formula
+        elements_count_dict: dict[str, int] = dict(
+            Parser.ElementCounter(chemical_formula=chemical_formula).parseFormula()
+        )
+
+        # Calculate the molar weight
+        for element in elements_count_dict.keys():
+            molar_weight += (
+                elements_count_dict[element] * Assets.periodic_table[element]
+            )
+
+        return round(molar_weight, 3)
+
 
 class UI:
     pass
