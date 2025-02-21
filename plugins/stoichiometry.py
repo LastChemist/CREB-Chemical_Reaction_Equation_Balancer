@@ -39,6 +39,10 @@ class GlobalVariables:
     """Stores reactants and products calculated gram values\n
     Note: This variable allocates value when calculate_values called"""
 
+    reactants_weights_list: list[float] = []
+    products_weights_list: list[float] = []
+    """Calculated weights"""
+
     equation_solution: list[int | float] = []
     """Stores the equation solution"""
 
@@ -318,7 +322,7 @@ class UI(Stoichiometry):
                 calculated_grams = ratio * input_mole_value * total_molar_weights[index]
                 species_moles.append(calculated_moles)
                 species_grams.append(calculated_grams)
-                
+
         # Proceeds by grams
         elif GlobalVariables.mode == "2":
             input_gram_value = float(input("Enter gram value: "))
