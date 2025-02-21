@@ -266,5 +266,54 @@ class UI:
         print("[2] - Gram")
         GlobalVariables.mode = input("> ")
 
+    def get_species_value(self):
+        """
+        Calculate and display the moles and grams of each species based on the user's input.
+
+        This method prompts the user to enter either a mole or gram value based on the selected mode.
+        It then calculates the moles and grams of each species and stores the values in GlobalVariables.
+
+        Global Variables:
+            GlobalVariables.mode (str): Indicates the mode of input (1 for mole, 2 for gram).
+            GlobalVariables.selected_species (str): The index of the selected species.
+            GlobalVariables.ratios (list): The stoichiometric ratios of the species.
+
+        Returns:
+            None
+        """
+        total_molar_weights = (
+            GlobalVariables.reactants_molar_weights_list
+            + GlobalVariables.products_molar_weights_list
+        )
+
+        species_moles = []
+        species_grams = []
+
+        if GlobalVariables.mode == "1":
+            input_mole_value = float(input("Enter mole value: "))
+            for index, ratio in enumerate(GlobalVariables.ratios):
+                calculated_moles = round(ratio * input_mole_value, 3)
+                calculated_grams = ratio * input_mole_value * total_molar_weights[index]
+                species_moles.append(calculated_moles)
+                species_grams.append(calculated_grams)
+
+        elif GlobalVariables.mode == "2":
+            input_gram_value = float(input("Enter gram value: "))
+            selected_chemical = GlobalVariables.total_species_chemical_formulas[
+                int(GlobalVariables.selected_specie)
+            ]
+            input_mole_value = input_gram_value / Stoichiometry.calc_molar_weight(
+                chemical_formula=selected_chemical
+            )
+            for index, ratio in enumerate(GlobalVariables.ratios):
+                calculated_moles = round(ratio * input_mole_value, 3)
+                calculated_grams = ratio * input_mole_value * total_molar_weights[index]
+                species_moles.append(calculated_moles)
+                species_grams.append(calculated_grams)
+
+        # Storing the calculated values in global variables
+        GlobalVariables.moles_list = species_moles
+        GlobalVariables.grams_list = species_grams
+
 
 # UI().display_reaction_table()
