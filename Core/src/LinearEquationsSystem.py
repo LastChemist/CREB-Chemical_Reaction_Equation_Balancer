@@ -1,5 +1,5 @@
-from utils import Assets
-from src.Parser import ElementMapper, EquationParser
+from Core.utils import Assets
+from Core.src.Parser import ElementMapper, EquationParser
 import os
 
 # region Generator
@@ -260,7 +260,7 @@ handler_object.write()
 handler_object.update(key="equation_solution",value=str(equation_solution))
     """
             #
-            # Note : I know this is not a best practice to repeat and place the file name twice instead of 
+            # Note : I know this is not a best practice to repeat and place the file name twice instead of
             # defining a single variable and do the job but, ... ... o well ¯\_(ツ)_/¯ it works, then I never touch it ¬_¬
             with open(
                 rf"{self.current_directory}\linear_equations_system_solver.automatic.py",

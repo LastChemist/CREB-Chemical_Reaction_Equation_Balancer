@@ -1,7 +1,7 @@
 import os
 from sympy import sympify
-from src.Parser import EquationParser
-from utils.JsonHandler import Handler
+from Core.src.Parser import EquationParser
+from Core.utils.JsonHandler import Handler
 
 
 class Rewriter:
