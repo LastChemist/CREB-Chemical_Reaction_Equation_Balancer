@@ -248,7 +248,7 @@ class UI(Stoichiometry):
             ).lower()
             == "y"
         ):
-            self.stoichiometry_calculator.calc_ratio()
+            self.calc_ratio()
         else:
             self.specie_selection()
 
