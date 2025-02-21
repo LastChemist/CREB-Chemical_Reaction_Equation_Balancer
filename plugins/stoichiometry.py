@@ -325,7 +325,7 @@ class UI(Stoichiometry):
             selected_chemical = GlobalVariables.total_species_chemical_formulas[
                 int(GlobalVariables.selected_specie)
             ]
-            input_mole_value = input_gram_value / Stoichiometry.calc_molar_weight(
+            input_mole_value = input_gram_value / self.calc_molar_weight(
                 chemical_formula=selected_chemical
             )
             for index, ratio in enumerate(GlobalVariables.ratios):
