@@ -178,7 +178,7 @@ class Stoichiometry:
             )
             for chemical_formula in GlobalVariables.products_list
         ]
-    
+
     def calc_moles_grams(self):
         """
         Calculate and store the moles and grams of reactants and products.
@@ -247,7 +247,9 @@ class Stoichiometry:
             GlobalVariables.products_weights_list.append(
                 round(
                     self.calc_molar_weight(chemical_formula=product)
-                    * GlobalVariables.ratios[GlobalVariables.products_list.index(product)],
+                    * GlobalVariables.ratios[
+                        GlobalVariables.products_list.index(product)
+                    ],
                     3,
                 )
             )
@@ -434,6 +436,71 @@ class UI(Stoichiometry):
         # Storing the calculated values in global variables
         GlobalVariables.moles_list = species_moles
         GlobalVariables.grams_list = species_grams
+
+    def display_output_table(self):
+        """
+        Calculate and display the output table of moles and grams for reactants and products.
+
+        This method calculates the moles and grams of reactants and products using the
+        calc_moles_grams method. It then constructs and displays a PrettyTable with the
+        chemical formulas, molar weights, moles, and grams of the reactants and products.
+
+        The table includes:
+        - Chemical formulas of reactants and products.
+        - Molar weights of reactants and products.
+        - Moles of reactants and products.
+        - Grams of reactants and products.
+
+        Global Variables:
+            GlobalVariables.reactants_list (list): List of reactants' chemical formulas.
+            GlobalVariables.products_list (list): List of products' chemical formulas.
+            GlobalVariables.reactants_molar_weights_list (list): Molar weights of reactants.
+            GlobalVariables.products_molar_weights_list (list): Molar weights of products.
+            GlobalVariables.reactants_mole_list (list): Moles of reactants.
+            GlobalVariables.products_mole_list (list): Moles of products.
+            GlobalVariables.reactants_gram_list (list): Grams of reactants.
+            GlobalVariables.products_gram_list (list): Grams of products.
+
+        Returns:
+            None
+        """
+        # Calculate moles and grams for reactants and products
+        self.calc_moles_grams()
+
+        # Construct the table's field names with chemical formulas
+        chemical_formulas = (
+            ["Chemical Formula"]
+            + GlobalVariables.reactants_list
+            + ["="]
+            + GlobalVariables.products_list
+        )
+
+        # Construct rows for molar weights, moles, and grams
+        molar_weights = (
+            ["Molar weight"]
+            + GlobalVariables.reactants_molar_weights_list
+            + ["***"]
+            + GlobalVariables.products_molar_weights_list
+        )
+        moles = (
+            ["Moles"]
+            + GlobalVariables.reactants_mole_list
+            + ["***"]
+            + GlobalVariables.products_mole_list
+        )
+        grams = (
+            ["Grams"]
+            + GlobalVariables.reactants_gram_list
+            + ["***"]
+            + GlobalVariables.products_gram_list
+        )
+
+        # Print the constructed table
+        print(
+            self.create_table(
+                field_names=chemical_formulas, rows=[molar_weights, moles, grams]
+            )
+        )
 
 
 # UI().display_reaction_table()
