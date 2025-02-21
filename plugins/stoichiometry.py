@@ -414,7 +414,9 @@ class UI(Stoichiometry):
             input_mole_value = float(input("Enter mole value: "))
             for index, ratio in enumerate(GlobalVariables.ratios):
                 calculated_moles = round(ratio * input_mole_value, 3)
-                calculated_grams = ratio * input_mole_value * total_molar_weights[index]
+                calculated_grams = round(
+                    ratio * input_mole_value * total_molar_weights[index], 3
+                )
                 species_moles.append(calculated_moles)
                 species_grams.append(calculated_grams)
 
