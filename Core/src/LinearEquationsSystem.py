@@ -242,7 +242,7 @@ class Generator:
 from sympy import symbols
 from sympy.solvers.solveset import linsolve
 import os
-from utils.JsonHandler import Handler
+from Core.utils.JsonHandler import Handler
 
 
 current_directory = os.path.dirname(__file__)
