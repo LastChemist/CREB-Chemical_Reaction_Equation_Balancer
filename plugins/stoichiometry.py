@@ -213,9 +213,16 @@ class UI:
             + ["***"]
             + GlobalVariables.products_molar_weights_list
         )
+        selection_row = ["Selection"]
+        for index in range(len(GlobalVariables.reactants_list)):
+            selection_row.append(index)
+        selection_row.append("***")  # Escape the "=" sign
+        for index in range(len(GlobalVariables.products_list)):
+            selection_row.append(len(GlobalVariables.reactants_list) + index)
 
-        ui = UI()
-        table = ui.create_table(field_names=chemical_formulas, rows=[molar_weights])
+        table = self.create_table(
+            field_names=chemical_formulas, rows=[molar_weights, selection_row]
+        )
 
         print(table)
 
