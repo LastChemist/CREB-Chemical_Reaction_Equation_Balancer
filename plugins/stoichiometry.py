@@ -245,5 +245,26 @@ class UI:
         else:
             self.specie_selection()
 
+    def mode_selection(self):
+        """
+        Prompt the user to select the mode for entering the starter quantity.
+
+        This method displays a menu for the user to choose whether to enter the starter
+        quantity as moles or grams. The user's choice is stored in the GlobalVariables.mode.
+
+        Global Variables:
+            GlobalVariables.mode (str): Stores the selected mode (mole or gram).
+
+        Returns:
+            None
+        """
+        print("Select one of the following options:")
+        print(
+            "Hint: Choose how you would like to enter the starter - as moles or grams."
+        )
+        print("[1] - Mole")
+        print("[2] - Gram")
+        GlobalVariables.mode = input("> ")
+
 
 # UI().display_reaction_table()
