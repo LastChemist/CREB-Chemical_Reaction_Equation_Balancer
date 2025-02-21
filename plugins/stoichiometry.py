@@ -296,6 +296,7 @@ class UI(Stoichiometry):
         species_moles = []
         species_grams = []
 
+        # Proceeds by moles
         if GlobalVariables.mode == "1":
             input_mole_value = float(input("Enter mole value: "))
             for index, ratio in enumerate(GlobalVariables.ratios):
@@ -303,7 +304,8 @@ class UI(Stoichiometry):
                 calculated_grams = ratio * input_mole_value * total_molar_weights[index]
                 species_moles.append(calculated_moles)
                 species_grams.append(calculated_grams)
-
+                
+        # Proceeds by grams
         elif GlobalVariables.mode == "2":
             input_gram_value = float(input("Enter gram value: "))
             selected_chemical = GlobalVariables.total_species_chemical_formulas[
