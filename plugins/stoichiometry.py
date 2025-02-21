@@ -162,7 +162,7 @@ class Stoichiometry:
         ]
 
 
-class UI:
+class UI(Stoichiometry):
     def __init__(self):
         pass
 
