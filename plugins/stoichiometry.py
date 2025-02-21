@@ -178,6 +178,99 @@ class Stoichiometry:
             )
             for chemical_formula in GlobalVariables.products_list
         ]
+    
+    def calc_moles_grams(self):
+        """
+        Calculate and store the moles and grams of reactants and products.
+
+        This method iterates over the reactants and products, calculating their weights, moles, and grams
+        based on the stoichiometric ratios and molar weights. The results are stored in the corresponding
+        global variables.
+
+        For reactants:
+            - Calculates the weight using the molar weight and stoichiometric ratio.
+            - Retrieves and rounds the mole value.
+            - Retrieves and rounds the gram value.
+
+        For products:
+            - Calculates the weight using the molar weight and stoichiometric ratio.
+            - Retrieves and rounds the mole value.
+            - Retrieves and rounds the gram value.
+
+        Global Variables:
+            GlobalVariables.reactants_list (list): List of reactants' chemical formulas.
+            GlobalVariables.products_list (list): List of products' chemical formulas.
+            GlobalVariables.ratios (list): Stoichiometric ratios of the species.
+            GlobalVariables.reactants_weights_list (list): Weights of reactants.
+            GlobalVariables.reactants_mole_list (list): Moles of reactants.
+            GlobalVariables.reactants_gram_list (list): Grams of reactants.
+            GlobalVariables.products_weights_list (list): Weights of products.
+            GlobalVariables.products_mole_list (list): Moles of products.
+            GlobalVariables.products_gram_list (list): Grams of products.
+            GlobalVariables.moles_list (list): Calculated moles.
+            GlobalVariables.grams_list (list): Calculated grams.
+
+        Returns:
+            None
+        """
+
+        for reactant in GlobalVariables.reactants_list:
+            GlobalVariables.reactants_weights_list.append(
+                round(
+                    self.calc_molar_weight(chemical_formula=reactant)
+                    * GlobalVariables.ratios[
+                        GlobalVariables.reactants_list.index(reactant)
+                    ],
+                    3,
+                )
+            )
+
+            GlobalVariables.reactants_mole_list.append(
+                round(
+                    GlobalVariables.moles_list[
+                        GlobalVariables.reactants_list.index(reactant)
+                    ],
+                    3,
+                )
+            )
+
+            GlobalVariables.reactants_gram_list.append(
+                round(
+                    GlobalVariables.grams_list[
+                        GlobalVariables.reactants_list.index(reactant)
+                    ],
+                    3,
+                )
+            )
+
+        for product in GlobalVariables.products_list:
+            GlobalVariables.products_weights_list.append(
+                round(
+                    self.calc_molar_weight(chemical_formula=product)
+                    * GlobalVariables.ratios[GlobalVariables.products_list.index(product)],
+                    3,
+                )
+            )
+
+            GlobalVariables.products_mole_list.append(
+                round(
+                    GlobalVariables.moles_list[
+                        len(GlobalVariables.reactants_list)
+                        + GlobalVariables.products_list.index(product)
+                    ],
+                    3,
+                )
+            )
+
+            GlobalVariables.products_gram_list.append(
+                round(
+                    GlobalVariables.grams_list[
+                        len(GlobalVariables.reactants_list)
+                        + GlobalVariables.products_list.index(product)
+                    ],
+                    3,
+                )
+            )
 
 
 class UI(Stoichiometry):
