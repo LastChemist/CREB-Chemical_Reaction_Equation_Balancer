@@ -219,5 +219,31 @@ class UI:
 
         print(table)
 
+    def specie_selection(self):
+        """
+        Prompt the user to select a species for stoichiometric calculations.
+
+        This method prompts the user to enter a selection, confirming their choice.
+        If the user confirms the selection, it proceeds to calculate the stoichiometric ratio.
+        If the user does not confirm, they can re-enter their selection.
+
+        Global Variables:
+            GlobalVariables.selected_specie (str): Stores the selected species.
+
+        Returns:
+            None
+        """
+        GlobalVariables.selected_specie = input("Enter your selection: ")
+        print(f'Selected "{GlobalVariables.selected_specie}"')
+        if (
+            input(
+                "Continue? [Y/n] \nHint: if no, you can edit your selection.\n > "
+            ).lower()
+            == "y"
+        ):
+            self.stoichiometry_calculator.calc_ratio()
+        else:
+            self.specie_selection()
+
 
 # UI().display_reaction_table()
