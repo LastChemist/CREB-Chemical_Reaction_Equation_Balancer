@@ -25,6 +25,20 @@ class GlobalVariables:
     """Stores reactants and products molar weights.\n
     Note: This variable allocates value when Stoichiometry initialized"""
 
+    reactants_mole_list: list[float] = []
+    products_mole_list: list[float] = []
+
+    total_chemicals_moles: list[float] = []
+    """Stores reactants and products calculated mole values\n
+    Note: This variable allocates value when calculate_values called"""
+
+    reactants_gram_list: list[float] = []
+    products_gram_list: list[float] = []
+
+    total_chemicals_grams: list[float] = []
+    """Stores reactants and products calculated gram values\n
+    Note: This variable allocates value when calculate_values called"""
+
     equation_solution: list[int | float] = []
     """Stores the equation solution"""
 
