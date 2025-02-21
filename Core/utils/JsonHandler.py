@@ -28,7 +28,7 @@ class Handler:
         Constructs all the necessary attributes for the Handler object.
         """
         self.content = {"equation_solution": "", "error_msg": ""}
-        self.file_path: str = rf"src\data.json"
+        self.file_path: str = rf"Core\src\data.json"
         if not os.path.isfile(self.file_path):
             self.write(content=self.content)
 
