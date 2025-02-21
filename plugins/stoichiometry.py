@@ -166,7 +166,9 @@ class UI:
     def __init__(self):
         pass
 
-    def create_table(field_names: list, rows: list, divider="-----") -> PrettyTable:
+    def create_table(
+        self, field_names: list, rows: list, divider="-----"
+    ) -> PrettyTable:
         """
         Creates a PrettyTable with the specified field names and rows, adding dividers between rows.
 
@@ -196,3 +198,26 @@ class UI:
         table.align = "c"  # Center-align all columns
 
         return table
+
+    def display_reaction_table(self):
+        chemical_formulas = (
+            ["Chemical Formula"]
+            + GlobalVariables.reactants_list
+            + ["="]
+            + GlobalVariables.products_list
+        )
+
+        molar_weights = (
+            ["Molar weight"]
+            + GlobalVariables.reactants_molar_weights_list
+            + ["***"]
+            + GlobalVariables.products_molar_weights_list
+        )
+
+        ui = UI()
+        table = ui.create_table(field_names=chemical_formulas, rows=[molar_weights])
+
+        print(table)
+
+
+# UI().display_reaction_table()
