@@ -1,5 +1,5 @@
-from src.LinearEquationsSystem import Generator
-from utils.ChemicalEquationRewriter import Rewriter
+from Core.src.LinearEquationsSystem import Generator
+from Core.utils.ChemicalEquationRewriter import Rewriter
 
 
 def balance(input_chemical_equation: str) -> str:
