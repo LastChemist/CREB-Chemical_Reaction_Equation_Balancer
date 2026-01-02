@@ -176,7 +176,7 @@ class EquationParser:
         )
         self.reactants_list = [
             (
-                "(" + species.strip() + ")"
+                species.strip()
                 if not species.strip().startswith("(")
                 else species.strip()
             )
@@ -184,7 +184,7 @@ class EquationParser:
         ]
         self.products_list = [
             (
-                "(" + species.strip() + ")"
+                species.strip()
                 if not species.strip().startswith("(")
                 else species.strip()
             )
