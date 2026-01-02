@@ -5,7 +5,8 @@ The previous file contains pre-made menu and table for balancing and stoichiomet
 """
 
 from Core.src import Parser, LinearEquationsSystem
-from Core.utils import ChemicalEquationRewriter, Assets
+from Core.utils import Assets
+
 
 class GlobalVariables:
 
@@ -56,6 +57,7 @@ class GlobalVariables:
     grams_list: list[float] = []
     """Stores calculated grams"""
 
+
 class Stoichiometry:
     def __init__(self, chemical_equation: str = ""):
         self.chemical_equation: str = chemical_equation
@@ -81,20 +83,11 @@ class Stoichiometry:
 
     def balance_equation(self):
         """Balances the chemical equation."""
-
-        # Generate and solve the system of linear equations representing the chemical equation
-        linear_equations_system_object: object = (
-            LinearEquationsSystem.Generator.FileMaker(
-                chemical_equation=self.chemical_equation
-            )
+        generator: object = LinearEquationsSystem.Generator(
+            chemical_equation=self.chemical_equation
         )
-        linear_equations_system_object.generateEquationAndSaveSolverFile()
-        linear_equations_system_object.executeSolverFile()
-
-        # Retrieve the solution to the chemical equation as a tuple
-        rewriter_object: object = ChemicalEquationRewriter.Rewriter()
-        rewriter_object.loadEquationSolutionInformation()
-        equation_solution: tuple = rewriter_object.equation_solution
+        generator.solveEquations()
+        equation_solution: tuple = generator.equation_solution
 
         # Convert the equation solution from a tuple to a list of coefficients
         coefficients_list: list[int] = []
@@ -275,7 +268,7 @@ class Stoichiometry:
                     3,
                 )
             )
-    
+
     def run(self):
         self.balance_equation()
         self.calc_species_molar_weight()
