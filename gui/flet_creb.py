@@ -1,6 +1,6 @@
 import flet as ft
 from Core import CREB
-from plugins import stoi2
+from plugins import stoichiometry_bare_bone
 from plugins.stoichiometry_bare_bone import GlobalVariables
 import pyperclip
 import threading
@@ -1112,7 +1112,7 @@ class ChemicalApp:
             x = creb.Rewriter()
             x.executeRewriter(chemical_equation=equation)
 
-            y = stoi2.Stoichiometry(chemical_equation=equation)
+            y = stoichiometry_bare_bone.Stoichiometry(chemical_equation=equation)
             y.balance_equation()
             y.calc_species_molar_weight()
 
@@ -1174,7 +1174,7 @@ class ChemicalApp:
 
             # Reinitialize stoichiometry with current equation
             equation = self.equation_input.value.strip()
-            y = stoi2.Stoichiometry(chemical_equation=equation)
+            y = stoichiometry_bare_bone.Stoichiometry(chemical_equation=equation)
             y.balance_equation()
             y.calc_species_molar_weight()
 
