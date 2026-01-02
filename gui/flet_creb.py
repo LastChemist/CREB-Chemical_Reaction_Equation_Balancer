@@ -1,7 +1,7 @@
 import flet as ft
 from Core import CREB
 from plugins import stoi2
-from plugins.stoichiometery_bare_bone import GlobalVariables
+from plugins.stoichiometry_bare_bone import GlobalVariables
 import pyperclip
 import threading
 import time
