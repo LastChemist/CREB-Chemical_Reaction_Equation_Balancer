@@ -1,98 +1,79 @@
-<<<<<<< HEAD
-# CREB (Chemical Reaction Equation Balancer) Project
+# CREB: Chemical Reaction Equation Balancer
 
-    This Python project aims to balance chemical reaction equations. While the code isn’t fully compliant with PEP8 conventions yet (due to my initial development process), I encourage contributions from the community. Feel free to fork the project and submit pull requests! 😊
+CREB (Chemical Reaction Equation Balancer) is a Python project designed to automatically balance chemical equations. This tool makes it easy for students, educators, and chemists to quickly and reliably transform unbalanced chemical equations into balanced ones following the law of conservation of mass.
 
-## Naming Style Conventions in CREB Project:
+## Features
 
-### Variables:
-- Use snake case for variable names (e.g., `reactants_list`).
-- If possible explicitly define variable types (e.g., `reactant_list: list[str] = []`).
+- **Automatic balancing** of chemical equations using matrix algebra or algorithmic approaches.
+- **User-friendly interface** (CLI or GUI, as available).
+- **Easy integration** into other Python workflows.
+- **Open source** and actively developed.
+- **Supports inorganic, organic, and redox equations**.
 
-### Functions:
-- Start function names with a lowercase letter and use camel case (e.g., `equationRewriter`, `equationFileGenerator`).
-- Specify the return type (e.g., `def sum(num1: float, num2: float) -> float`).
+## Installation
 
-### Classes:
-- Class definitions should follow camel case (PEP8) conventions (e.g., `class Util`, `class LinearEquationsSystem`).
+Clone the repository and install any required dependencies.
 
-### Modules:
-- Module names should also be in camel case.
-- Keep module names short and distinct from class names to avoid confusion.
+```bash
+git clone https://github.com/LastChemist/CREB-Chemical_Reaction_Equation_Balancer.git
+cd CREB-Chemical_Reaction_Equation_Balancer
+pip install -r requirements.txt
+```
 
+> **Note:** Ensure you are using Python 3.7 or later.
 
-## Footer
-- Persian documentation (until v0.2) - [link to virgool.io](https://vrgl.ir/c9daU)
-- English documentation comes when version 0.4 is published.
+## Usage
 
-###### made with ❤️ and tons of ATP (Adenosine triphosphate)  
-=======
-## Modules and Classes
+Depending on the interface provided:
 
-### [`Core/src/Parser.py`](Core/src/Parser.py)
+### Command Line Interface
 
-- **ElementMapper**
+```bash
+python creb.py
+```
 
-  - Description: Maps elements in a chemical formula to their positions.
-  - Methods: [`search()`](Core/src/Parser.py)
+You will be prompted to enter an unbalanced chemical equation. For example:
 
-- **ElementCounter**
+```
+Enter equation: H2 + O2 -> H2O
+Balanced equation: 2 H2 + O2 -> 2 H2O
+```
 
-  - Description: Counts elements in a chemical formula.
-  - Methods: [`parseFormula()`](Core/src/Parser.py)
+### As a Python Module
 
-- **EquationParser**
-  - Description: Parses and balances chemical equations.
-  - Methods: [`splitIntoChemicalSpecies()`](Core/src/Parser.py), [`countElementsInChemicalSpecie()`](Core/src/Parser.py), [`parse()`](Core/src/Parser.py)
+You can also use CREB in your own Python code:
 
-### [`Core/src/LinearEquationsSystem.py`](Core/src/LinearEquationsSystem.py)
+```python
+from creb import balance_equation
 
-- **Generator**
+result = balance_equation("Fe + O2 -> Fe2O3")
+print("Balanced:", result)
+# Output: Balanced: 4 Fe + 3 O2 -> 2 Fe2O3
+```
 
-  - Description: Generates linear equations for balancing chemical equations.
-  - Methods: [`presentElementsInChemicalFormula()`](Core/src/LinearEquationsSystem.py), [`presentElementsInReaction()`](Core/src/LinearEquationsSystem.py), [`assignParameter()`](Core/src/LinearEquationsSystem.py), [`generateLinearEquationsSystem()`](Core/src/LinearEquationsSystem.py)
+## Examples
 
-- **FileMaker**
-  - Description: Creates and executes a solver file for the system of linear equations.
-  - Methods: [`generateEquationAndSaveSolverFile()`](Core/src/LinearEquationsSystem.py), [`executeSolverFile()`](Core/src/LinearEquationsSystem.py)
-
-### [`Core/utils/JsonHandler.py`](Core/utils/JsonHandler.py)
-
-- **Handler**
-  - Description: Handles reading, writing, updating, and removing JSON data files.
-  - Methods: [`write()`](/c:/Users/ALI/.vscode/extensions/ms-python.vscode-pylance-2025.2.1/dist/typeshed-fallback/stdlib/_io.pyi), [`read()`](/c:/Users/ALI/.vscode/extensions/ms-python.vscode-pylance-2025.2.1/dist/typeshed-fallback/stdlib/_io.pyi), [`update()`](Core/utils/JsonHandler.py), [`removeJsonDataFile()`](Core/utils/JsonHandler.py)
-
-### [`Core/utils/ChemicalEquationRewriter.py`](Core/utils/ChemicalEquationRewriter.py)
-
-- **Rewriter**
-  - Description: Rewrites chemical equations with balanced coefficients.
-  - Methods: [`loadEquationSolutionInformation()`](Core/utils/ChemicalEquationRewriter.py), [`loadChemicalFormulasDictionary()`](Core/utils/ChemicalEquationRewriter.py), [`assignCoefficientsToChemicalFormulas()`](Core/utils/ChemicalEquationRewriter.py), [`executeRewriter()`](Core/utils/ChemicalEquationRewriter.py)
-
-### [`plugins/stoichiometry.py`](plugins/stoichiometry.py)
-
-- **Stoichiometry**
-
-  - Description: Performs stoichiometric calculations for chemical equations.
-  - Methods: [`balance_equation()`](plugins/stoichiometry.py), [`calc_molar_weight()`](plugins/stoichiometry.py), [`calc_ratio()`](plugins/stoichiometry.py), [`calc_species_molar_weight()`](plugins/stoichiometry.py), [`calc_moles_grams()`](plugins/stoichiometry.py)
-
-- **UI**
-  - Description: Provides a user interface for stoichiometric calculations.
-  - Methods: `create_table()`, `display_reaction_table()`, `specie_selection()`, `mode_selection()`, `get_species_value()`, `display_output_table()`
+- `H2 + Cl2 -> HCl` → `H2 + Cl2 -> 2 HCl`
+- `Na + H2O -> NaOH + H2` → `2 Na + 2 H2O -> 2 NaOH + H2`
 
 ## Contributing
 
-We welcome contributions to the project! Please follow these guidelines:
+Contributions are welcome! You can:
 
-- Fork the repository
-- Create a new branch for your feature or bug fix
-- Submit a pull request with a detailed description of your changes
+- Submit bug reports and feature requests via [Issues](https://github.com/LastChemist/CREB-Chemical_Reaction_Equation_Balancer/issues)
+- Fork the repo and submit pull requests
+- Improve documentation and add test cases
+
+For major changes, please open an issue first to discuss what you would like to change.
 
 ## License
 
-This project is licensed under the AGPL-3 License.
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ## Contact
-For any questions or support, please contact [LastChemist](https://github.com/LastChemist/creb).
 
-###### made with ❤️ and tons of ATP (Adenosine triphosphate)
->>>>>>> origin/test-add
+Maintainer: [LastChemist](https://github.com/LastChemist)
+
+---
+
+*CREB aims to be your go-to tool for chemical equation balancing. Happy balancing!*
